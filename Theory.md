@@ -77,6 +77,7 @@ A Low-Pass Filter allows low frequencies to pass and blocks high
 frequencies.
 
 Mathematically:
+1. `Ideal LPF`
 
 $$G(u,v) = H_{LPF}(u,v) \cdot F(u,v)
 $$
@@ -91,6 +92,15 @@ $$
 
 $D(u,v)$= distance from center\
 $D_{0}$= cutoff frequency
+
+2. `Butterworth LPF`
+
+$$H(u,v)=\frac{1}{1+\left(\frac{D(u,v)}{D_0}\right)^{2n}}$$
+
+3. `Gaussian LPF`
+$$
+H(u,v)=\exp \left(-\frac{D(u,v)^2}{2D_0^2}\right)
+$$
 
 **Effect of Low-Pass Filter**
 
@@ -116,8 +126,11 @@ A High-Pass Filter allows high frequencies to pass and blocks low
 frequencies.
 
 Mathematically:
+High-Pass Filter is the complement of the low-pass filter; 
+_1 - (low-pass filter)_
 
-$$G(u,v) = H_{HPF}(u,v) \cdot F(u,v)
+`eg. High-Pass Filter for Ideal Low-Pass`
+$$G(u,v) = 1 - H_{HPF}(u,v) \cdot F(u,v)
 $$
 
 Where:
@@ -155,33 +168,8 @@ $$
 
 This determines whether a frequency is low or high.
 
-**7. Summary of Effects**
-
-+----------------+----------------+-----------------+-----------------+
-| **Filter       | **Filter       | **Blocks**      | **Effect**      |
-| Type**         | Type**         |                 |                 |
-+================+================+=================+=================+
-| Low-Pass       | Low            | High            | Blurring,       |
-|                | frequencies    | frequencies     | smoothing       |
-+----------------+----------------+-----------------+-----------------+
-| High-Pass      | High           | Low frequencies | Edge            |
-|                | frequencies    |                 | enhancement     |
-|                |                |                 |                 |
-|                |                |                 |   ---           |
-|                |                |                 | --------------- |
-|                |                |                 |                 |
-|                |                |                 |    , sharpening |
-|                |                |                 |   --            |
-|                |                |                 | -- ------------ |
-|                |                |                 |                 |
-|                |                |                 |   ---           |
-|                |                |                 | --------------- |
-+----------------+----------------+-----------------+-----------------+
-
-  ------------------ --------------- --------------- ---------------------
-                                                     
-
-  ------------------ --------------- --------------- ---------------------
+**7. Ringing Artifacts**
+Sharp transitions in frequency masks (as in Ideal filters) cause oscillations in the spatial domain known as ringing artifacts (Gibbs phenomenon). Smoother filters like Gaussian reduce these artifacts.
 
 **8. Conceptual Interpretation**
 
